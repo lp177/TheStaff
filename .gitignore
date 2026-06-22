@@ -1,0 +1,41 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---- Node / Vue / Vite ----
+node_modules/
+frontend/dist/
+.vite/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---- thestaff runtime data ----
+# The whole data dir is runtime-generated and may contain REAL device data
+# (scan DB + nmap XML with IPs/MACs) and the large offline NVD feed. The app
+# recreates it on start (ensure_dirs / scripts mkdir -p), so never commit it.
+/data/
+*.log
+
+# ---- Editor / OS ----
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# ---- Secrets / local config ----
+.env
+.env.*
+!.env.example

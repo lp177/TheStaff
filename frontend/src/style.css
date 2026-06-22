@@ -1,0 +1,137 @@
+:root {
+  color-scheme: dark;
+
+  --bg: #0b1020;
+  --bg-grid: #141b30;
+  --panel: #131a2e;
+  --panel-2: #1b2540;
+  --panel-3: #243150;
+  --border: #2a3658;
+  --text: #e7ecf6;
+  --muted: #93a0bf;
+  --brand: #5b8cff;
+
+  /* remediation state colors (the heart of the diagram) */
+  --open: #ef4444;        /* red   */
+  --solved: #22c55e;      /* green */
+  --accepted: #3b82f6;    /* blue  */
+  --clean: #5b6786;       /* grey  */
+
+  /* CVE severity */
+  --sev-critical: #f43f5e;
+  --sev-high: #fb923c;
+  --sev-medium: #facc15;
+  --sev-low: #38bdf8;
+  --sev-none: #64748b;
+
+  --scrollbar-thumb: #33406a;
+  --scrollbar-track: transparent;
+
+  --radius: 12px;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #app {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a { color: var(--brand); }
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  padding: 0.45rem 0.8rem;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
+}
+button:hover { background: var(--panel-3); }
+button:active { transform: translateY(1px); }
+button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary { background: var(--brand); border-color: var(--brand); color: #06112e; font-weight: 600; }
+.btn-primary:hover { background: #6f9bff; }
+.btn-accept { background: var(--accepted); border-color: var(--accepted); color: #04122e; font-weight: 600; }
+.btn-solve { background: var(--solved); border-color: var(--solved); color: #042814; font-weight: 600; }
+.btn-danger { color: var(--open); border-color: #5a2230; }
+
+/* modern scrollbars */
+.scroller { scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); scrollbar-width: thin; }
+@supports not (scrollbar-color: auto) {
+  .scroller::-webkit-scrollbar { width: 10px; height: 10px; }
+  .scroller::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 6px; }
+  .scroller::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+}
+
+/* status pills */
+.pill {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.12rem 0.5rem; border-radius: 999px;
+  font-size: 0.72rem; font-weight: 600; line-height: 1.4;
+  border: 1px solid transparent;
+}
+.pill .dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; }
+.state-open    { color: var(--open);     background: color-mix(in srgb, var(--open) 16%, transparent);     border-color: color-mix(in srgb, var(--open) 40%, transparent); }
+.state-solved  { color: var(--solved);   background: color-mix(in srgb, var(--solved) 16%, transparent);   border-color: color-mix(in srgb, var(--solved) 40%, transparent); }
+.state-accepted{ color: var(--accepted); background: color-mix(in srgb, var(--accepted) 16%, transparent); border-color: color-mix(in srgb, var(--accepted) 40%, transparent); }
+.state-clean   { color: var(--clean);    background: color-mix(in srgb, var(--clean) 16%, transparent);    border-color: color-mix(in srgb, var(--clean) 40%, transparent); }
+.dot-open { background: var(--open); } .dot-solved { background: var(--solved); }
+.dot-accepted { background: var(--accepted); } .dot-clean { background: var(--clean); }
+
+.sev-critical { color: var(--sev-critical); }
+.sev-high { color: var(--sev-high); }
+.sev-medium { color: var(--sev-medium); }
+.sev-low { color: var(--sev-low); }
+.sev-none, .sev-unknown { color: var(--sev-none); }
+
+/* ---- Vue Flow theming ---- */
+.vue-flow__background { background: var(--bg); }
+.vue-flow__edge-path { stroke: var(--clean); stroke-width: 1.5; opacity: 0.5; }
+.edge-open .vue-flow__edge-path    { stroke: var(--open); opacity: 0.8; }
+.edge-solved .vue-flow__edge-path  { stroke: var(--solved); opacity: 0.7; }
+.edge-accepted .vue-flow__edge-path{ stroke: var(--accepted); opacity: 0.7; }
+.vue-flow__node { cursor: pointer; }
+.vue-flow__handle { opacity: 0; }
+
+/* crosshair over empty diagram (drag to rubber-band select) */
+.vue-flow__pane { cursor: crosshair; }
+.vue-flow__pane.dragging { cursor: crosshair; }
+/* the drag selection rectangle — contrasted fill + brand border */
+.vue-flow__selection,
+.vue-flow__nodesselection-rect {
+  background: color-mix(in srgb, var(--brand) 16%, transparent);
+  border: 1px solid var(--brand);
+}
+/* selected device nodes: brand outline + slightly brighter card */
+.vue-flow__node.selected { filter: brightness(1.14); }
+.vue-flow__node.selected .device-card {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+  border-color: var(--brand);
+}
+
+/* ---- native dialog (detail view) ---- */
+dialog {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--text);
+  padding: 0;
+  max-width: min(680px, 94vw);
+  width: 680px;
+  max-height: 88vh;
+}
+dialog::backdrop { background: rgba(4, 8, 20, 0.62); backdrop-filter: blur(3px); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-enter-active, .fade-leave-active { transition: opacity 0.15s ease; }
+  .fade-enter-from, .fade-leave-to { opacity: 0; }
+}

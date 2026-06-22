@@ -1,0 +1,38 @@
+# Podman Quadlet unit (system-level, NOT --user — rootless can't open raw
+# sockets on the host netns, which nmap needs for ARP / -sS / -O).
+#
+# Install:
+#   sudo cp deploy/thestaff.container /etc/containers/systemd/
+#   sudo cp -r . /opt/thestaff            # or adjust the Volume path below
+#   sudo systemctl daemon-reload
+#   sudo systemctl start TheStaff
+#
+[Unit]
+Description=TheStaff — consent-based WiFi security-awareness game
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=localhost/thestaff:latest
+Network=host
+DropCapability=ALL
+AddCapability=NET_RAW
+# Add NET_ADMIN only if you see interface/route errors from nmap:
+# AddCapability=NET_ADMIN
+ReadOnly=true
+NoNewPrivileges=true
+Tmpfs=/tmp:rw,nosuid,nodev,size=64m
+Volume=/opt/thestaff/data:/data:Z
+Environment=THESTAFF_MODE=real
+# "auto" detects the LAN subnet; or set an explicit CIDR e.g. 192.168.50.0/24
+Environment=TARGET_CIDR=auto
+Environment=SCAN_INTERVAL_MIN=15
+Environment=THESTAFF_ORGANIZER=the event team
+Environment=THESTAFF_SSID=thestaff-challenge
+Environment=THESTAFF_CONSENT_MODE=wifi
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

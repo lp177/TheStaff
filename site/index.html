@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <title>TheStaff — consent-based security-awareness game</title>
+  <meta name="description" content="TheStaff is a consent-based, educational security-awareness game for dev/maker events: map each guest's device, find weak spots, and verify fixes together — with an optional AI assistant and a privacy mode." />
+  <link rel="icon" href="img/favicon.ico" sizes="48x48" />
+  <meta property="og:title" content="TheStaff — security-awareness game" />
+  <meta property="og:description" content="Consent-based security-awareness game for dev/maker events." />
+  <meta property="og:image" content="img/banner.png" />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- top app bar -->
+  <header class="appbar elev-2">
+    <a class="appbar-brand" href="#top">
+      <img src="img/logo.png" alt="" width="28" height="28" />
+      <span>TheStaff</span>
+    </a>
+    <nav class="appbar-nav">
+      <a href="#quickstart">Quick start</a>
+      <a href="#screens">Screenshots</a>
+      <a href="#config">Token &amp; API</a>
+      <a class="btn btn-filled" href="https://github.com/" data-repo>GitHub ↗</a>
+    </nav>
+  </header>
+
+  <!-- hero / banner -->
+  <section class="hero" id="top">
+    <img class="hero-banner elev-3" src="img/banner.png" alt="TheStaff — Security-awareness game" />
+    <p class="hero-tagline">
+      A <strong>consent-based</strong>, educational <strong>security-awareness game</strong> for dev/maker events.
+      Map every guest device, find the weak spots, and verify the fixes — together.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-filled lg" href="#quickstart">Get started</a>
+      <a class="btn btn-outlined lg" href="#screens">See it in action</a>
+    </div>
+    <p class="hero-note">⚠️ For authorized, consent-based security-awareness events only.</p>
+  </section>
+
+  <main class="container">
+    <!-- features -->
+    <section class="features">
+      <article class="card elev-1">
+        <div class="card-ic">🛰️</div>
+        <h3>Discover &amp; map</h3>
+        <p>nmap scans the event LAN on a schedule and draws each device as a live card around a central hub.</p>
+      </article>
+      <article class="card elev-1">
+        <div class="card-ic">🩺</div>
+        <h3>Find &amp; fix</h3>
+        <p>Open ports → services → likely CVEs with CVSS, plain-language summaries, fix steps and copy-paste detection-only tests.</p>
+      </article>
+      <article class="card elev-1">
+        <div class="card-ic">🤖</div>
+        <h3>AI assistant</h3>
+        <p>Per-CVE chat (your Claude or OpenAI key) that explains the finding and helps you verify it's no longer exploitable.</p>
+      </article>
+      <article class="card elev-1">
+        <div class="card-ic">🛡️</div>
+        <h3>Privacy mode</h3>
+        <p>Mask device IPs on the diagram and in AI messages — safe to show on a shared screen.</p>
+      </article>
+    </section>
+
+    <!-- quick start -->
+    <section id="quickstart">
+      <h2>Quick start</h2>
+
+      <div class="run card elev-2">
+        <div class="run-head"><span class="chip">Try it now</span> mock mode — no network, nmap or container</div>
+        <div class="codeblock">
+          <button class="copy-btn" aria-label="Copy command">Copy</button>
+          <pre><code>./scripts/dev.sh
+cd frontend &amp;&amp; npm install &amp;&amp; npm run dev</code></pre>
+        </div>
+        <p class="open-hint">then open <a href="#" class="url">http://localhost:5173/dashboard</a> <span>← the live dashboard</span></p>
+      </div>
+
+      <div class="run card elev-2">
+        <div class="run-head"><span class="chip chip-red">Run for real</span> container, at the event (rootful Podman)</div>
+        <div class="codeblock">
+          <button class="copy-btn" aria-label="Copy command">Copy</button>
+          <pre><code>cp .env.example .env
+sed -i "s|^THESTAFF_ADMIN_TOKEN=.*|THESTAFF_ADMIN_TOKEN=$(openssl rand -hex 24)|" .env
+sudo ./start.sh</code></pre>
+        </div>
+        <p class="open-hint">then open <a href="#" class="url">http://&lt;host-ip&gt;:8000</a> <span>← dashboard on the event box</span></p>
+        <p class="muted small">The generated token is required; paste the same value into ⚙ Settings → Operator token. Rebuild later with <code>sudo ./update.sh</code>.</p>
+      </div>
+    </section>
+
+    <!-- screenshots carousel -->
+    <section id="screens">
+      <h2>Screenshots</h2>
+      <p class="muted">Shown in <strong>privacy mode</strong> on the built-in demo network — IPs masked to <code>192.168.x.x</code>.</p>
+      <div class="carousel card elev-3">
+        <div class="slides">
+          <figure class="slide">
+            <img src="img/diagram.png" alt="Live radial network diagram" loading="lazy" />
+            <figcaption><strong>Live diagram.</strong> Every device as a card around the event hub; colour = worst finding state.</figcaption>
+          </figure>
+          <figure class="slide">
+            <img src="img/cve-report.png" alt="Device CVE report popup" loading="lazy" />
+            <figcaption><strong>CVE report.</strong> Per-device ports &amp; CVEs with CVSS, fix steps and copy-paste detection-only tests.</figcaption>
+          </figure>
+          <figure class="slide">
+            <img src="img/ai-chat.png" alt="AI assistant chat about a CVE" loading="lazy" />
+            <figcaption><strong>Ask AI.</strong> A per-CVE chat that explains the finding and helps verify the fix (your own API key).</figcaption>
+          </figure>
+          <figure class="slide">
+            <img src="img/settings.png" alt="Settings panel" loading="lazy" />
+            <figcaption><strong>Settings.</strong> Privacy mode, AI keys &amp; model, and the operator token — all in one panel.</figcaption>
+          </figure>
+        </div>
+        <button class="nav prev" aria-label="Previous">‹</button>
+        <button class="nav next" aria-label="Next">›</button>
+        <div class="dots"></div>
+      </div>
+    </section>
+
+    <!-- token & API config -->
+    <section id="config">
+      <h2>Operator token &amp; AI keys</h2>
+      <div class="config-grid">
+        <div class="config-text">
+          <h3>Operator token</h3>
+          <p>A secret <em>you</em> generate gates every mutating/active action (scan, accept, healthcheck, wipe, AI). It lives in a gitignored <code>.env</code>; <code>start.sh</code>/<code>update.sh</code> require it. Paste the same value into <strong>⚙ Settings → Operator token</strong>.</p>
+          <div class="codeblock sm">
+            <button class="copy-btn" aria-label="Copy command">Copy</button>
+            <pre><code>openssl rand -hex 24</code></pre>
+          </div>
+          <h3>AI keys &amp; model</h3>
+          <p>Add a <strong>Claude</strong> or <strong>OpenAI</strong> key in Settings — it's stored only in your browser and proxied per request (never saved on the server). Click <em>Discover models</em>, pick a default, and an <strong>Ask AI</strong> button appears on each CVE.</p>
+          <h3>Privacy mode</h3>
+          <p>Toggle it to mask IPs on the diagram and in messages sent to the AI — so a guest's address isn't shown on a shared screen or sent to a third-party model.</p>
+        </div>
+        <figure class="config-shot card elev-2">
+          <img src="img/settings.png" alt="Settings panel showing privacy mode, AI keys and operator token" loading="lazy" />
+          <figcaption>The Settings panel: privacy mode, AI keys/model, and the operator token.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>
+      <strong>TheStaff</strong> — detection-only, consent-based, educational.
+      Obtain venue/network authorization and participant opt-in before any scanning.
+    </p>
+    <p class="muted small">
+      <a href="https://github.com/" data-repo>Source on GitHub</a> ·
+      Read <code>docs/ETHICS.md</code> &amp; <code>docs/RULES_OF_ENGAGEMENT.md</code> first.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
