@@ -14,7 +14,7 @@ import { maskIp } from "@/lib/privacy";
 
 const store = useDevicesStore();
 const settings = useSettingsStore();
-const { setNodes, setEdges, fitView, onNodeClick, findNode, getSelectedNodes, removeSelectedElements, setState } =
+const { setNodes, setEdges, fitView, onNodeClick, findNode, getSelectedNodes, removeSelectedElements } =
   useVueFlow();
 
 const graph = computed(() => buildGraph(store.hosts));
@@ -76,10 +76,6 @@ function onKeydown(e: KeyboardEvent) {
 }
 
 onMounted(() => {
-  // Partial selection: a device is selected when the rubber-band touches its card
-  // (not only when fully enclosed). The prop alone doesn't reliably reach the
-  // store, so set it explicitly here too.
-  setState({ selectionMode: SelectionMode.Partial });
   nextTick(() => fitView({ padding: 0.25 }));
   window.addEventListener("keydown", onKeydown);
 });

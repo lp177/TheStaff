@@ -11,4 +11,5 @@ data
 .env
 .env.*
 docs
+documentation
 scripts/smoketest.py

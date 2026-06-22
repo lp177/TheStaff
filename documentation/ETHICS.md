@@ -24,7 +24,7 @@ This tool is **not** a covert surveillance tool and must never be used as one.
    them, consent is the **WiFi password** itself (`THESTAFF_CONSENT_MODE=wifi`): you only
    hand out the password *after* informing people (signage + briefing) that joining means being
    scanned, so connecting a device is the consenting act. Whoever connects a device must be
-   authorized to do so. See `docs/CONSENT.md` for the consent modes.
+   authorized to do so. See `documentation/CONSENT.md` for the consent modes.
 3. **Non-destructive by default.** Discovery, version detection, and CVE *re-testing* use
    light, non-exploitative checks (is the port open? does the banner still show the
    vulnerable version?). TheStaff does **not** run exploits or denial-of-service against

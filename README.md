@@ -11,15 +11,15 @@ device** — turning findings from 🔴 *open* to 🟢 *solved* (or 🔵 *knowin
 > ⚠️ **For authorized, consent-based security-awareness events only.** Operators must obtain
 > venue/network-owner authorization and participant opt-in before any scanning. Unauthorized
 > scanning may violate laws such as the CFAA (US), the Computer Misuse Act (UK), and GDPR.
-> Read [`docs/ETHICS.md`](docs/ETHICS.md) and [`docs/RULES_OF_ENGAGEMENT.md`](docs/RULES_OF_ENGAGEMENT.md) first.
+> Read [`documentation/ETHICS.md`](documentation/ETHICS.md) and [`documentation/RULES_OF_ENGAGEMENT.md`](documentation/RULES_OF_ENGAGEMENT.md) first.
 
 <p align="center">
-  <img src="site/img/diagram.png" alt="TheStaff live network diagram (privacy mode)" width="900" />
+  <img src="docs/img/diagram.png" alt="TheStaff live network diagram (privacy mode)" width="900" />
 </p>
 
 > 📸 **Full screenshot tour** (CVE report, AI assistant, settings) on the project site:
-> **<https://your-org.github.io/thestaff/>** — built from [`site/`](site/) and deployed by
-> GitHub Actions. *(Update the URL to your Pages address after publishing.)*
+> **<https://your-org.github.io/thestaff/>** — the static site in [`docs/`](docs/). Publish it via
+> **Settings → Pages → Deploy from a branch → `main` / `/docs`**. *(Update the URL to your Pages address.)*
 
 ---
 
@@ -156,7 +156,7 @@ base image to `python:3.12-slim`.
  └──────────────────────────────────────────────────────────────┘
                           ▲  Vue 3 + Vue Flow radial map (Pinia + WS)
 ```
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the full design.
+See [`documentation/ARCHITECTURE.md`](documentation/ARCHITECTURE.md) for the full design.
 
 ## Tech stack
 
@@ -191,7 +191,8 @@ backend/app/        FastAPI app, scan pipeline, models, routers, WebSocket
 frontend/src/       Vue app: views (Dashboard, Consent), components, Pinia store, libs
 deploy/             Podman Quadlet unit
 scripts/            dev · build · run · fetch_nvd_feed · update_oui · smoketest
-docs/               ETHICS · ARCHITECTURE · RULES_OF_ENGAGEMENT · CONSENT
+documentation/      ETHICS · ARCHITECTURE · RULES_OF_ENGAGEMENT · CONSENT
+docs/               GitHub Pages site (served at Settings → Pages → /docs)
 ```
 
 ## Tests / smoke check
@@ -206,5 +207,5 @@ Licensed under the [MIT License](LICENSE).
 
 The license grants broad reuse, but it does **not** waive your legal and ethical obligations:
 you are responsible for lawful, **authorized, consent-based** use only. TheStaff is
-detection-only and never exploits guest devices. Read [`docs/ETHICS.md`](docs/ETHICS.md) and
-[`docs/RULES_OF_ENGAGEMENT.md`](docs/RULES_OF_ENGAGEMENT.md) before running it.
+detection-only and never exploits guest devices. Read [`documentation/ETHICS.md`](documentation/ETHICS.md) and
+[`documentation/RULES_OF_ENGAGEMENT.md`](documentation/RULES_OF_ENGAGEMENT.md) before running it.

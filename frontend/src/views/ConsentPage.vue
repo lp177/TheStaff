@@ -146,7 +146,7 @@ async function join() {
 
       <footer>
         Authorized, consent-based security-awareness use only. See the project README and
-        <code>docs/ETHICS.md</code> for the rules of engagement.
+        <code>documentation/ETHICS.md</code> for the rules of engagement.
         <span v-if="info"> · {{ info.opt_in_count }} participants opted in.</span>
       </footer>
     </div>
